@@ -1,0 +1,17 @@
+#include<stdio.h>
+int main()
+{
+    double r;
+    while(scanf("%lf", &r) != EOF)    
+    {
+        double V;
+        if(0<r && r<100.000000)
+        {
+        V = 4.0/3.0 * 3.14 * r * r * r;;//此处当是4/3时得到的是1；不带小数点无论定义成什么类型都按整型处理
+
+                                     //解决办法：把4/3写成4.0/3.
+        }
+        printf("%f\n", V);
+    }
+    return 0;
+}
