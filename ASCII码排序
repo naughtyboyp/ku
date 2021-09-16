@@ -1,8 +1,11 @@
+在scanf中 “\n” 不是表示接受一个回车符，
+而是表示忽略所有的空白字符（包括回车,空格,tab ）。
+所以想要结束输入,输入任意一个非空白字符即可,但是该字符仍然会留在缓冲区中。
 # include<stdio.h>
 int main()
 {
 		char a,b,c,temp;
-		while(scanf("%c%c%c",&a,&b,&c)!=EOF)
+		while(scanf("%c%c%c",&a,&b,&c)!=EOF) 
 	{
 	if(a>b)
 	{
