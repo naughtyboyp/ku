@@ -1,0 +1,55 @@
+判断从l到r中有多少个数的每一位都是完全平方数且这个数自身也是完全平方数
+
+
+
+2021.9.20 加强数据
+
+Input
+t组数据，每组包含两个整数l,r
+
+（0<=l<=r<=1000000）
+1<=t<=1000000
+
+Output
+ 每组输出一个答案，表示从l到r有多少符合要求的数
+
+
+SampleInput
+2
+1 10
+30 100
+SampleOutput
+3
+2
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    int t = 0;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int num=0;
+        int a,b,c;
+        int i,m,k;
+        scanf("%d%d", &a, &b);
+        for(i= 0; i*i<=b; i++)
+        {
+            k = i*i;//得出 b之前的完全平方数
+            if(k>=a)//得出a-b之间的完全平方数
+            {
+                m = 1;//默认都是完全平方数
+                while(k)
+                {
+                    c = k%10;//求每一位 
+                    if(c!=sqrt(c)*sqrt(c))//排除各位不是完全平方数
+                        m = 0;
+                    k=k/10;
+                }
+                if(m)num++;
+            }
+        }
+        printf("%d\n", num);
+    }
+    return 0;
+}
