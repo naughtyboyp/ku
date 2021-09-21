@@ -1,0 +1,17 @@
+输出字符串，打印字符串中的大写字母
+1.一定要数组初始化
+2.gets（）函数是专门用来写字符串的
+#include<stdio.h>
+int main()
+{
+    char arr[105] = {0};
+    gets(arr);
+    for(int i = 0; i<105; i++)
+    {
+        if(65<=arr[i] && arr[i]<=90)
+        {
+            printf("%c", arr[i]);
+        }
+    }
+    return 0;
+}
