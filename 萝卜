@@ -1,0 +1,56 @@
+Sid有一只兔子叫Bunny。Bunny有n个萝卜，每个萝卜高h_i。Sid想知道第m高的萝卜有多高。
+
+Input
+第一行一个组数T
+每组数据第一行两个整数n, m。1 <= m <= n <= 100
+每组数据第二行有n个整数h_1, h_2, ..., h_n。1 <= h_i <= 1000000000
+
+Output
+每组数据输出一个整数表示第m高的萝卜高度。
+#include<stdio.h>
+void ShellSort(int* arr, int len)//希尔排序
+{
+    int i = 0;
+    int j = 0;
+    int tmp = 0;
+    int k = 0;
+    int gap = 0;
+    for(gap= len/2; gap>0; gap/=2)//
+    {
+        for(i = 0; i<gap; i++)
+        {
+            for(j = i + gap; j < len; j+=gap)//插入排序
+            {
+                tmp = arr[j];//记录值
+                k = j - gap;//
+                while(k>= 0 && tmp > arr[k])//寻找插入位置
+                {
+                    arr[k + gap] = arr[k];//寻找最值
+                    k-=gap;
+                }
+                arr[k+gap] = tmp;//插入最值
+            }
+        }
+    }
+
+}
+int main()
+{
+    int t = 0;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int i = 0;
+        int n = 0;
+        int m = 0;
+        int h[105] = {0};
+        scanf("%d%d", &n, &m);
+        for(i = 0; i<n; i++)
+        {
+            scanf("%d", &h[i]);
+        }
+        ShellSort(h, n);
+        printf("%d\n", h[m-1]);//打印第m高
+    }
+    return 0;
+}
