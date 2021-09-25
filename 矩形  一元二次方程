@@ -1,0 +1,15 @@
+已知 长和宽的差  矩形面积
+求最长的边
+运用一元二次方程 求根公式
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    double b = 0.0;
+    double c= 0.0;
+    scanf("%lf%lf", &b, &c);
+    double disc = b*b + 4*b*c;
+    double x = (-b +sqrt(disc))/2;
+    printf("%lf", x+b);
+    return 0;
+}
