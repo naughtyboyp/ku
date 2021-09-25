@@ -5,7 +5,7 @@ int main()
     scanf("%d", &t);
     while(t--)
     {
-        int x[200] = {0};
+        int x[200] = {0};//由于要通过坐标来计算斜率 故用了两个数组来存放坐标 
         int y[200] = {0};
         int i = 0;
         int j = 0;
