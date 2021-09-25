@@ -33,16 +33,16 @@ int main()
         int a,b,c;
         int i,m,k;
         scanf("%d%d", &a, &b);
-        for(i= 0; i*i<=b; i++)
+        for(i= 0; i<=sqrt（b）; i++) 如果 i<sqrt(b) 同时平方  i*i < b 那么 i*i是小于b的平方数  
         {
-            k = i*i;//得出 b之前的完全平方数
-            if(k>=a)//得出a-b之间的完全平方数
+            k = i*i;//首先求出 b之前的平方数
+            if(k>=a)//再求 a-b之间的完全平方数
             {
                 m = 1;//默认都是完全平方数
                 while(k)
                 {
                     c = k%10;//求每一位 
-                    if(c!=sqrt(c)*sqrt(c))//排除各位不是完全平方数
+                    if(c!=sqrt(c)*sqrt(c))//判断 c是否为平方数
                         m = 0;
                     k=k/10;
                 }
