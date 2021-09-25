@@ -1,0 +1,37 @@
+#include<stdio.h>
+int main()
+{
+    int t = 0;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int x[200] = {0};
+        int y[200] = {0};
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        int max = 0;
+        for(i = 1; i<=5; i++)
+        {
+            scanf("%d%d", &x[i], &y[i]);
+        }
+        for(i = 1; i<=5; i++)//找出所有可能性
+        {
+            for(j = i+1; j<=5; j++)
+            {
+                int c = 2; //至少踹两个
+                for(k = j+1;k<=5;k++)
+                {
+                    if((y[i]-y[k])*(x[j]-x[k])==(y[j]-y[k])*(x[i]-x[k])) //根据斜率相同，固定1,2英雄飞，然后是判断3,4,5是否飞；
+                    {
+                        c++;//在一条直线上，就飞
+                    }
+                    if(max<c)
+                        max = c;//c为一组判断内踹飞的人数；max查找所有组内踹飞的最多人
+                }
+            }
+        }
+        printf("%d\n", max);
+    }
+    return 0;
+}
