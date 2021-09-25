@@ -23,7 +23,7 @@ Input
 
 Output
 数组最后亮着的灯的个数
-容斥原理
+容斥原理 
 #include<stdio.h>
 int main()
 {
