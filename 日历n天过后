@@ -1,0 +1,51 @@
+#include<stdio.h>
+int Isleap(int year)
+{
+    if(year %400 == 0 || (year % 4 == 0 && year%100 != 0))
+       {
+           return 1;
+       }
+       else
+        {
+            return 0;
+        }
+}
+int main()
+{
+    int year,month,day,n;
+    int a[13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+    scanf("%d%d%d%d", &year, &month, &day, &n);
+    int i = 0;
+    if(1 == Isleap(year))//判断闰年
+        {
+            a[2] = 29;
+        }
+        else
+        {
+            a[2] = 28;
+        }
+    for(i = 1; i<=n; i++)
+    {
+        day+=1;//一天天加
+        if(day>a[month])//超过当月就month就加
+        {
+            day= day -a[month];
+            month++;
+        }
+        if(month>12)//月满了 年加
+        {
+            year++;
+            month = 1;
+            if(1 == Isleap(year))//判断新的一年是新年
+            {
+                a[2] = 29;
+            }
+            else
+            {
+                a[2] = 28;
+            }
+        }
+    }
+    printf("%d %d %d", year, month, day);
+    return 0;
+}
