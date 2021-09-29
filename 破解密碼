@@ -1,0 +1,45 @@
+#include<stdio.h>
+int main()
+{
+    int n = 0;
+    while(scanf("%d", &n)!=EOF)
+    {
+        getchar();
+        char str[1005];
+        int i = 0;
+        for(i = 0; i<n; i++)
+        {
+            scanf("%c", &str[i]);
+        }
+        int a = 0;//左边
+        int b = n-1;//右边
+        while(a<=b)
+        {
+            int left = 0;//默认左边为假命题
+            for(i = 0; ;i++)//判断左右大小，如果左边小，则输出左边
+            {
+                if(str[a+i] < str[b-i])
+                {
+                    left = 1;//如果左边小，左边为真
+                    break;
+                }
+                if(str[a+i] > str[b-i])
+                {
+                    break;
+                }
+                //如果左右相等，不做处理，进入下一次判断，判断去头或去尾巴
+                //根据里面的大小，保证字典序最小；
+            }
+            if(left)//判断出左边的较小
+            {
+                putchar(str[a++]);//输出左边，并进入下一位判断
+            }
+            else
+            {
+                putchar(str[b--]);
+            }
+        }
+         printf("\n");
+    }
+    return 0;
+}
