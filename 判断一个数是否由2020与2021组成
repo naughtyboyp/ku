@@ -1,0 +1,26 @@
+
+给你一个数 n ，试问 n 是否可以由 2020 和2021 的任一比例组合而成？
+先看n最多可以由多少个 2020 组成，剩下的余数加在前面的 2020 上就形成 2021 了。
+#include<stdio.h>
+int main()
+{
+    int t = 0;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int n = 0;
+        int x,y;
+        scanf("%d", &n);
+        x = n%2020;//求n的余数
+        y = n/2020;//求有多少个2020，当x<=y时，就形成x个2021了；
+        if(x<=y)
+        {
+            printf("YES\n");
+        }
+        else
+        {
+            printf("NO\n");
+        }
+    }
+    return 0;
+}
