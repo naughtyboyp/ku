@@ -48,7 +48,7 @@ int main()
                 max = c[i];//得出到出口距离最大值
             }
         }
-        printf("%d", max);
+        printf("%d\n", max);
     }
     return 0;
 }
