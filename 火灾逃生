@@ -3,6 +3,7 @@
 所以在他们相遇的时候可以视为保持原样错位而继续前进（即可视为穿过那个人）
 这样便可以认为每个人都是独立运动的，
 所以求最长时间，就是人到走廊尽头的最长长度（注意方向）。*/
+解法1.  //用数组存储全部人的信息，再遍历数组求出最大值
 #include<stdio.h>
 int main()
 {
@@ -44,3 +45,36 @@ int main()
     }
     return 0;
 }
+
+解法2   //直接从每个人出发
+#include<stdio.h>
+int main()
+{
+    int t = 0;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int N = 0;
+        int L = 0;
+        int i = 0;
+        int max = 0;
+        int m = 0;
+        int n = 0;
+        scanf("%d%d", &N, &L);
+        for(i = 0; i<N; i++)//一个一个判断，直接得出每个人距出口的距离，并求最大值
+        {
+            scanf("%d%d", &m, &n);
+            if(n)
+            {
+                m = L - m;
+            }
+            if(max<m)
+            {
+                max = m;
+            }
+        }
+        printf("%d\n", max);
+    }
+    return 0;
+}
+
