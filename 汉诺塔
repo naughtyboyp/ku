@@ -1,0 +1,28 @@
+#include<stdio.h>
+//A是初始地，B是辅助的，C是目的地
+void hanoi(int n, char A, char B, char C)//从A 绕过 B 移动到C
+{
+    if(n == 1)//递归结束的条件
+    {
+        printf("%d->%d\n", A, C);
+    }
+    else
+    {
+        hanoi(n-1, A, C, B);//若n>1,把上面的n-1块，从A 绕过 C 移动到 B
+        printf("%d->%d\n", A, C);//把A 移动到C
+        hanoi(n-1, B, A, C);//再把B 绕过 A 移动到 C
+    }
+}
+int main()
+{
+    int n = 0;
+    while(~scanf("%d", &n))
+    {
+        int A = 1;
+        int B = 2;
+        int C = 3;
+        hanoi(n, A, B, C);
+        printf("\n");
+    }
+    return 0;
+}
