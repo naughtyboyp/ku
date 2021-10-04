@@ -1,0 +1,37 @@
+#include<stdio.h>
+//化大为小，一个个城市的判断，先解决小的问题
+int main()
+{
+    int n = 0;
+    while(~scanf("%d", &n))
+    {
+        int a[1005] = {0};//记录价格
+        int b[1005] = {0};//记录路程
+        int i = 0;
+        for(i = 1; i<=n; i++)
+        {
+            scanf("%d", &a[i]);
+        }
+        for(i = 1; i<=n-1; i++)
+        {
+            scanf("%d", &b[i]);
+        }
+        int prime = 0;
+        prime = a[1];//第一个城市价格
+        int sum = 0;
+        for(i = 1; i<=n; i++)
+        {
+            sum = sum + prime*b[i];
+            if(prime <= a[i+1])//比较下一个城市价格
+            {
+                continue;//小于等于 保持价格不变
+            }
+            else
+            {
+                prime = a[i+1];//大于 价格变成下一个城市
+            }
+        }
+        printf("%d\n", sum);
+    }
+    return 0;
+}
