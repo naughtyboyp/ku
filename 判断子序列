@@ -34,3 +34,34 @@ int main()
     }
     return 0;
 }
+优化：
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char s[100005] = {0};
+    char t[100005] = {0};
+    while(~scanf("%s%s", s, t))
+    {
+        int a = 0;
+        int b = 0;
+        while(s[a] && t[b])//s【】或t【】有一个超出就跳出循环
+        {
+            if(s[a] == t[b])//开始查找
+            {
+                a++;//找到的话 a就进一个
+            }
+            b++;//b每次进一个
+        }
+        if(!s[a])//如果子序列s出现0，说明全部查找到
+        {
+            printf("Yes\n");
+        }
+        else
+        {
+            printf("No\n");
+        }
+    }
+    return 0;
+}
+
