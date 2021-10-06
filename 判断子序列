@@ -1,0 +1,36 @@
+给定两个字符串s和t，您必须确定s是否是t的子序列，即是否可以从t中删除字符，以使其余字符的串联为s。
+#include<stdio.h>
+#include<string.h>
+//该题与分糖果有异曲同工之妙
+int main()
+{
+    char s[100005] = {0};
+    char t[100005] = {0};
+    while(~scanf("%s%s", s, t))
+    {
+        int len1 = strlen(s);//计算字符串长度
+        int len2 = strlen(t);
+        int a = 0;//用来比较
+        int b = 0;//用来比较
+        int i = 0;
+        while(a <=len1 && b <= len2)
+        {
+            if(s[a] == t[b])//遍历是否相等
+            {
+                a++;
+            }
+            b++;
+            if(a == len1 )
+            {
+                printf("Yes\n");
+                break;
+            }
+            if(b == len2 && a != len1)
+            {
+                printf("No\n");
+                break;
+            }
+        }
+    }
+    return 0;
+}
