@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<math.h>
+int a[1000005];//利用前缀和来记录 完全平方数的个数
+int Is(int k)
+{
+    if( k != (int)sqrt(k) * (int)sqrt(k) )//判断一个数是不是平方数
+    {
+        return 0;
+    }
+    else
+    {
+        int a = 0;
+        while(k)
+        {
+            a = k%10;
+            k/=10;
+            if(a != (int)sqrt(a) * (int)sqrt(a))
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
+}
+int main()
+{
+    a[0] = 1;
+    int i = 0;
+    for(i = 1; i <= 1000005; i++)//在进入循环之前，直接一次记录性记录  1 - N 之间完全平方数个数的前缀和
+        {
+            a[i] = a[i-1] + Is(i);
+        }
+    int t = 0;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int l = 0;
+        int r = 0;
+        scanf("%d%d", &l, &r);
+        printf("%d\n", a[r] - a[l-1]);
+    }
+    return 0;
+}
