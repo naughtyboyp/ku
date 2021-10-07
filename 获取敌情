@@ -1,0 +1,60 @@
+
+所截获这条信息是长度为N的字符串Str，要重新组合成一个长度同样为N的字符串Ttr。Ttr一开始是一个空串。
+重新组合的规则如为：每次从Str的字符串的头部或者尾部去除一个字符，并且接到Ttr的尾部。重复操作,直到Str为空串，Ttr为长度为N的字符串。
+ut
+输入包含多组样例。
+首先输入整数N（1<=N<=1000）
+然后输入字符串Str（仅含有大写字母）
+Output
+对于每一组测试案例，在每一行输出破解后的字符串Ttr。
+
+SampleInput
+6
+ACDBCB
+6
+DDABDD
+6
+DDBADD
+SampleOutput
+ABCBCD
+DDABDD
+DDABDD
+#include<stdio.h>
+int main()
+{
+    int N = 0;
+    while(~scanf("%d", &N))
+    {
+        char str[1005] = {0};
+        scanf("%s", str);
+        int i = 0;
+        int a = 0;
+        int b = N-1;
+        while(a<=b)
+        {
+            int left = 0;
+            for(i = 0;;i++)
+            {
+                if(str[a+i] < str[b-i])
+                {
+                    left = 1;
+                    break;
+                }
+                if(str[a+i] > str[b-i])
+                {
+                    break;
+                }
+            }
+            if(left)
+            {
+                printf("%c", str[a++]);
+            }
+            else
+            {
+                printf("%c", str[b--]);
+            }
+        }
+        printf("\n");
+    }
+    return 0;
+}
