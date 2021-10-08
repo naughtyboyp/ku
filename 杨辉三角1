@@ -1,0 +1,31 @@
+//本题要有跨循环使用的意识
+//本题关键在于编写  三角运算
+#include <stdio.h>
+int main()
+{
+    int n;
+	while(~scanf("%d",&n))
+    {
+        long long int i, j,  k, t;
+        long long int Buf[100000]={0,1};
+        for( i = 1; i <= n; i++)	//输出n行
+        {
+            long long t = 0;
+            for( j = 1; j <= i; j++)//第n行，输出n个数，计算并输出杨辉三角形
+            {
+                k = Buf[j];//k为本次循环的值
+                Buf[j] = t + k;		//每个数是上面两数之和（三角计算）
+                t = k;//t为上次循环的值，跨循环使用
+                if(j<i)
+                printf("%lld ", Buf[j]);
+                else
+                {
+                    printf("%lld", Buf[j]);
+                }
+            }
+            printf("\n");
+        }
+        printf("\n");
+    }
+	return 0;
+}
