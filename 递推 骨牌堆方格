@@ -1,0 +1,20 @@
+//输出的值很大，所以要用longlong 来存储
+
+# include <stdio.h>
+int main()
+{
+    int n=0;
+    while(~scanf("%d",&n))
+    {
+        long long int a[60] = {0};
+        a[1]=1;
+        a[2]=2;
+        for(int i=3;i<=n;i++)
+        {
+            a[i]=a[i-1]+a[i-2];
+        }
+            printf("%lld\n",a[n]);
+    }
+
+    return 0;
+}
