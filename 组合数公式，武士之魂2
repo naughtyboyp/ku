@@ -1,0 +1,26 @@
+long long Comb(int n, int m)//组合数公式
+{
+    long long ans = 1;
+
+    if(m > n - m)   // C(n,m) = C(n,n-m),可以减少运算
+        m = n - m;
+
+    for(int i = n-m+1, j = 1; i <= n; ++i, ++j)
+       ans = ans * i / j;
+
+    return ans;
+}
+
+#include<stdio.h>
+int main()
+{
+    int n = 0;
+    scanf("%d", &n);
+    while(n--)
+    {
+        int m = 0;
+        scanf("%d", &m);//分析问题得出结论  一共有 C（m+m,m）种路线
+        printf("%lld\n", Comb(2*m,m));
+    }
+    return 0;
+}
