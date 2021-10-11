@@ -1,0 +1,38 @@
+//本题难点在于  判断出第一次循环节
+//这个题模拟除法的计算过程。然后记录下来曾经除过的数。
+
+如果之后重新除到了这个数或者被除数等于0了，那么说明这是一个循环节。
+#include<stdio.h>
+#include<string.h>
+int a [100005];
+int main()
+{
+    int n = 0;
+    while(~scanf("%d", &n))
+    {
+        memset(a,0,sizeof(a));
+        int t = 1;
+        if(n == 1 || n == -1)
+        {
+            printf("%d\n", n);
+        }
+        else
+        {
+            if(n < 0)
+            {
+                n = -n;//绝对值
+                printf("-");
+            }
+            printf("0.");
+            while(a[t] != 1 && t != 0)
+            {
+                a[t] = 1;
+                t*=10;
+                printf("%d", t/n);
+                t%=n;
+            }
+            printf("\n");
+        }
+    }
+    return 0;
+}
