@@ -1,0 +1,34 @@
+#include<stdio.h>
+#include<string.h>
+int a [100005];
+int main()
+{
+    int n = 0;
+    while(~scanf("%d", &n))
+    {
+        memset(a,0,sizeof(a));
+        int t = 1;
+        if(n == 1 || n == -1)//1或-1的情况
+        {
+            printf("%d\n", n);
+        }
+        else//小数
+        {
+            if(n < 0)//负数把负号前置
+            {
+                n = -n;//绝对值
+                printf("-");
+            }
+            printf("0.");//打印小数
+            while(a[t] != 1 && t != 0)//a[t]数组记录除到了这个数，如果之后重新除到了这个数或者被除数等于0了，那么说明这是一个循环节。
+            {
+                a[t] = 1;
+                t*=10;
+                printf("%d", t/n);
+                t%=n;
+            }
+            printf("\n");
+        }
+    }
+    return 0;
+}
