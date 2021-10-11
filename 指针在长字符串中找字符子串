@@ -1,0 +1,61 @@
+在一个长长的字符串中找到一个字符子串。
+#include<stdio.h>
+#include<string.h>
+char s1[10005];
+char s2[105];
+int search(char* s2, const char* s1,int len2)
+{
+    int count = 1;
+    char* a = s2;//将搜索的字符串放在a中
+    while(*s1 != '\0')
+    {
+        s2 = a;// //让s2指向a，即字符串的第一个字符，目的是在一次比较之后，让s2指回字符串的首部。
+        if(*s2 == *s1)//判断当前字符是否相等
+        {
+            while(*s2 != '\0')//当相等时，判断下面几个字符
+            {
+                if(*s2 == *s1)
+                {
+                    count++;
+                    s1++;//进行判断s1下一位
+                    s2++;//进行判断s2
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        if(*s2 == '\0')
+        {
+            break;
+        }
+        count++;
+        s1++;
+    }
+//判断所要搜索的字符串是否遍历完，若遍历完，则表示已找到完全相等的，跳出整个循环。否则继续寻找下一个相等的部分。
+    if(*s2 == '\0')
+    {
+        return count - len2;
+    }
+    else
+    {
+        return -1;
+    }
+}
+int main()
+{
+    int t = 0;
+    scanf("%d", &t);
+    int t1 = t;
+    while(t--)
+    {
+        if(t == t1-1 )
+        getchar();
+        gets(s1);
+        gets(s2);
+        int len2 = strlen(s2);
+        printf("%d\n", search(s2,s1,len2));
+    }
+    return 0;
+}
