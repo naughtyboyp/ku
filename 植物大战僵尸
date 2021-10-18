@@ -1,0 +1,44 @@
+植物大战僵尸
+TimeLimit:1000ms  MemoryLimit:128000KB
+64-bit integer IO format:%lld
+Problem Description
+恭喜大家进入复试！现在到了植物大战僵尸时间，问题很简单。现在有一个豌豆射手，它每秒发射一个豌豆，豌豆的飞行速度是V0。在它的面前有L米的草地，你可以假设它是一个点。现在有个只僵尸来袭，他以速度V1匀速向豌豆袭来。僵尸被击n次才会挂掉，僵尸得用2秒时间吃掉豌豆。（为了使题目更简单我们假设不会出现僵尸吃掉豌豆射手的时刻刚好被打死这种情况）豌豆射手能不能守住草坪呢？嗯，现在把这个问题交给你了
+
+ 
+
+Input
+输入包含多组数据，每组包含四个数L,V0，V1，n。意义如上所述。
+Output
+如果豌豆射手能打死僵尸输出YES,否则输出NO
+
+SampleInput
+657 62 46 46
+771 89 7 2
+SampleOutput
+NO
+YES
+//简单的数学，  僵尸到植物用t秒 发射t颗加上吃了两秒就是t+2颗
+#include<stdio.h>
+int main()
+{
+    int l = 0;
+    int v0 = 0;
+    int v1 = 0;
+    int n = 0;
+    while(~scanf("%d%d%d%d", &l, &v0, &v1, &n))
+    {
+        int t = l/(v1)+2;
+        if(t >= n)
+        {
+            printf("YES\n");
+        }
+        else
+        {
+            printf("NO\n");
+        }
+
+
+
+    }
+    return 0;
+}
