@@ -1,0 +1,46 @@
+题目大意：
+给定一个200位的大数a和一个int类型的数b，问b能否整除a。
+
+核心思想：
+以字符串类型读取a，存在s[n]中，以int类型读取b。
+遍历a的每一位，每遍历一位进行以下操作：
+1、a=a*10+s[i]-‘0’
+2、a%=b
+最后判断a是否为0，是则可以整除，否则不可整除。
+
+代码如下：
+#include<cstdio>
+#include<iostream>
+#include<cstring>
+using namespace std;
+typedef long long ll;
+char s[450];
+int main()
+{
+	int T,ca=0;
+	ll a,b;
+	cin>>T;
+	while(T--)
+	{
+		scanf("%s%lld",s,&b);
+		int len=strlen(s);
+		//处理符号 
+		if(b<0)
+			b=-b;
+		int k;
+		if(s[0]=='-') k=1;
+		else k=0;
+		//遍历s
+		a=0;
+		for(int i=k;i<len;i++)
+		{
+			a=a*10+s[i]-'0';
+			a%=b;
+		}
+		if(a)
+			printf("Case %d: not divisible\n",++ca);
+		else
+			printf("Case %d: divisible\n",++ca);
+	}
+	return 0;
+}
