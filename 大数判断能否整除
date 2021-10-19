@@ -11,7 +11,7 @@ int main()
         int i = 0;
         for(i = 0; i< strlen(s); i++)
         {
-            m = (m*10+ s[i] - '0')%8;
+            m = (m*10+ s[i] - '0')%8;//因为每一个A都可以分解成n*B+C，其中C为A%B的值，m就是A的拆解
         }
         if(m == 0)
         {
