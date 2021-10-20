@@ -6,7 +6,7 @@ long long Comb(int n, int m)//组合数公式
         m = n - m;
 
     for(int i = n-m+1, j = 1; i <= n; ++i, ++j)
-       ans = ans * i / j;
+       ans = ans * i / j;//注意一定要先算乘法， 先算i/j可能除不尽取余，导致答案错误
 
     return ans;
 }
