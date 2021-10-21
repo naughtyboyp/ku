@@ -1,0 +1,89 @@
+迎新大队
+TimeLimit:1000MS  MemoryLimit:258MB
+64-bit integer IO format:%lld
+Problem Description
+为了迎接新生，学校决定派出迎新大队，迎新大队的人要有才艺，这样才能给学弟学妹留下美好的开学记忆，现在假设参加迎新大队的每一位同学的才艺值为ai，经过大家的讨论，队伍里如果可以存在这么一种序列其中每一个 i （1 <= i <= n-1）都满足 ai+1<=3∗ai，这样的团队表演才是最好的。注意：因为如果序列降序的话表演效果极差，所以序列不能采用降序的方式。现在负责人遇到了一个问题，很多的学长都想来参加迎新大队（主要为了小学妹），于是负责人很困惑，请你帮助负责人，在团队表演最好的情况下，最多可以从想要参加的人中选出多少人？
+
+Input
+第一行输入一个整数n（1<=n<=1000），代表想要参加迎新大队的总人数
+
+第二行输入n个整数（ai在int范围），代表想要参加迎新大队的每一个人的才艺值，保证每一个人的才艺值都是独一无二的
+
+Output
+输出一个整数，代表在团队表演最好的情况下，最多可以从想要参加的人中选出多少人
+
+SampleInput
+10
+70 2 3 15 200 20 500 1000 650 1
+SampleOutput
+5
+
+
+
+#include<stdio.h>
+#include<string.h>
+void shellsort(int* a, int len)
+{
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    int gap = 0;
+    int temp = 0;
+    for(gap = len/2; gap>0; gap/=2)
+    {
+        for(i = 0; i<gap; i++)
+        {
+            for(j = gap+i; j<len; j+=gap)
+            {
+                temp = a[j];
+                k = j - gap;
+                while(k >=0 && temp < a[k])
+                {
+                    a[k + gap] = a[k];
+                    k-=gap;
+                }
+                a[k + gap] = temp;
+            }
+        }
+    }
+}
+int main()
+{
+    int n = 0;
+    int a[1005] = {0};
+    int b[1005] = {0};
+    scanf("%d", &n);
+    int i = 0;
+    int num = 1;
+    for(i = 0; i< n; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+    shellsort(a, n);
+    int sum = 0;
+    int j = 0;
+    int k = 0;
+    int max = 0;
+    for(i = 0; i< n; i++)
+    {
+        num = 1;
+        for(j = i; j <n; j++)
+        {
+            if(a[j+1] <= 3*a[j] && a[j+1] != 0)
+            {
+                num++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        b[k++] = num;
+        if(max < b[i])
+        {
+            max = b[i];
+        }
+    }
+    printf("%d", max);
+    return 0;
+}
