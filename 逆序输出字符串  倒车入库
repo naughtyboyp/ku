@@ -1,0 +1,47 @@
+1，找到密文字符串Str的中心点，把密文平均分成Str1和Str2(如果中心点是字符,该字符不变)、
+
+2，然后把Str1和Str2字符串进行对称翻转，形成新串L、
+
+3，新串L就是解密后的情报、
+PS:对称翻转:比如字符串原本为S[0],S[1]...S[N-1],S[N]，对称翻转后变成S[N],S[N-1]...S[1],S[0]、
+
+
+
+Input
+有多组测试案例，每次测试案例输入一条只由小写字母组成的字符串的情报(字符串长度少于100000).
+
+Output
+对于每组测试数据，在每行中输出解密后的情报、
+
+SampleInput
+ujftmca
+volimcae
+SampleOutput
+fjutacm
+iloveacm
+
+#include<stdio.h>
+#include<string.h>
+char a[100000];
+int main()
+{
+    while(~scanf("%s", a))
+    {
+        int i = 0;
+        int len = strlen(a);
+        for(i = len/2-1; i>=0; i--)
+        {
+            putchar(a[i]);
+        }
+        if(len%2)
+        {
+            putchar(a[len/2]);
+        }
+        for(i = len-1; i >= len/2 + len%2; i--)//巧妙
+        {
+            putchar(a[i]);
+        }
+        puts("");
+    }
+    return 0;
+}
