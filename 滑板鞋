@@ -1,0 +1,47 @@
+1.   Sydwqfehu'i Sekjx Cxydq Mehdydw Peij hufehjut jxqj Cxyduiu
+2.   Singapore's South China Morning Post reported that Chinese
+根据上面对应关系，小涛得出这是一个针对小写字母abc....z组合的一个z后是a的环，然后得出的结果是句1的每个小写字母向后数第10个就是句2里面对应的字母，大写字母和其他字符不变。
+要翻译的句子过长，小涛是个没有耐心的孩子，请你帮忙用计算机求解
+Input
+输入数据的第一行是一个整数n，要翻译的句子的个数，后面跟着n行，每行包括一个字符串，字符串长度不超过300.
+Output
+对于每个测试实例，输出该串中对应字符串，每个输出占一行。
+SampleInput
+1
+Sydwqfehu'i Sekjx Cxydq Mehdydw Peij hufehjut jxqj Cxyduiu
+SampleOutput
+Singapore's South China Morning Post reported that Chinese
+
+
+//本题关键在于对字符串的运用
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    int n = 0;
+    scanf("%d", &n);
+    getchar();
+    while(n--)
+    {
+        char str[305] = {0};
+        gets(str);
+        int i = 0;
+        int len = strlen(str);
+        for(i = 0; i <len; i++)
+        {
+            if(str[i] >='a' && str[i] <= 'z')
+            {
+                if(str[i] + 10 > 'z')
+                {
+                    str[i] = (str[i] + 10) - 26;
+                }
+                else
+                {
+                    str[i]+=10;
+                }
+            }
+        }
+        puts(str);
+    }
+    return 0;
+}
