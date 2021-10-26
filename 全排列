@@ -1,0 +1,36 @@
+#include<stdio.h>
+int a[11] = {0};//存放数字
+int b[11] = {0};//标记数字
+void dfs(int num, int n)
+{
+    int i = 0;
+    if(num == n+1)
+    {
+        for(i = 1; i<=n-1; i++)
+        {
+            printf("%d ", a[i]);
+        }
+        printf("%d", a[i]);
+        printf("\n");
+        return ;
+    }
+    for(i = 1; i<=n; i++)
+    {
+        if(b[i])
+        {
+            continue;
+        }
+        b[i] = 1;
+        a[num] = i;
+        dfs(num+1, n);
+        b[i] = 0;//回溯初始化
+    }
+    return ;
+}
+int main()
+{
+    int n = 0;
+    scanf("%d", &n);
+    dfs(1,n);
+    return 0;
+}
