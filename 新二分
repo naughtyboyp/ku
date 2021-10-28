@@ -1,0 +1,95 @@
+Problem Description
+二分查找的基础
+
+Input
+多组测试数据
+
+每组测试数据的第一行输入n，m表示数组的长度和询问的次数(1<=n,m<=105)
+
+接下来一行是n个数字A0...An-1 满足 Ai<=Ai+1 (1<=Ai<=109)
+
+然后输入m行，每行是一个数字Qi表示询问(1<=Qi<=109)
+
+Output
+对于每个询问，如果Qi在数组中出现过，输出两个数字分别第一次出现和最后一次出现的位置，如果Qi在数组中没有出现，则输出一个数字表示第一个大于Qi的数字的位置（如果没有任何数字大于Qi则输出n）
+
+SampleInput
+10 4
+3 3 3 5 5 5 6 7 7 7
+1
+5
+6
+10
+SampleOutput
+0
+3 5
+6 6
+10
+
+
+//本题使用了新型二分法，其中left与right被赋予了新的含义
+当序列中出现相同的数字，left表示的是最右边的那位，同理可以改成右边的
+right表示第一个大于k的数的坐标
+同理
+修改成 a[mid] < k
+left则表示第一个小于k的数的坐标
+如果出现未找到
+left表示第一个小于k的数的坐标
+right表示第一个大于k的数的坐标
+http://www.cnblogs.com/qswg/p/6251887.html
+#include<stdio.h>
+int search(int* a, int k, int len)
+{
+    int left = -1;
+    int right = len;
+    int mid = 0;
+    int i = 0;
+    while(left+1 < right)
+    {
+        mid = (left + right)/2;
+        if(a[mid] <=k)
+        {
+            left = mid;
+        }
+        else
+        {
+            right = mid;
+        }
+    }
+    if(a[left] == k)
+    {
+        i = left;
+        while(a[i] == k)
+        {
+            i--;
+        }
+        printf("%d ", i+1);
+        printf("%d\n", left);
+    }
+    else
+    {
+        printf("%d\n", right);
+    }
+
+}
+int main()
+{
+    int n = 0;
+    int m = 0;
+    while(~scanf("%d%d", &n, &m))
+    {
+        int a[100005] = {0};
+        int i = 0;
+        for(i = 0; i<n; i++)
+        {
+            scanf("%d", &a[i]);
+        }
+        while(m--)
+        {
+            int k = 0;
+            scanf("%d", &k);
+            search(a, k,n);
+        }
+    }
+    return 0;
+}
