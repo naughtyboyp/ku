@@ -93,3 +93,55 @@ int main()
     }
     return 0;
 }
+
+优化版
+返回值为right   注意如果有相同数字时的分界线是在左边  之所以选择这种情况是因为  题目（如果没有任何数字大于Qi则输出n）  翻译意思就是说  如果啥都找不到，那么就输出边界坐标
+
+#include<stdio.h>
+int search(int* a,int len,int k)
+{
+    int left = -1;
+    int right = len;
+    while(left+1 < right)
+    {
+        int mid = (left+right)/2;
+        if(a[mid] <k)
+        {
+            left = mid;
+        }
+        else
+        {
+            right = mid;
+        }
+    }
+    return right;
+}
+int a[100005];
+int main()
+{
+    int n = 0;
+    int m = 0;
+    while(~scanf("%d%d", &n, &m))
+    {
+        int i = 0;
+        for(i = 0; i< n; i++)
+        {
+            scanf("%d", &a[i]);
+        }
+        while(m--)
+        {
+            int k = 0;
+            scanf("%d", &k);
+            if(a[search(a,n, k)] != k)
+            {
+                printf("%d\n", search(a,n,k));
+            }
+            else
+            {
+                printf("%d %d\n", search(a,n,k), search(a,n,k+1)-1);
+            }
+        }
+    }
+    return 0;
+}
+
