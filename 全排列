@@ -1,31 +1,34 @@
 #include<stdio.h>
-int a[11] = {0};//存放数字
-int b[11] = {0};//标记数字
-void dfs(int num, int n)
+//总结，自我理解
+//递归通过自己的画图理解，发现递归就像一颗树一样，层层深入，配合循环，就像树一样不断分支
+//个人理解通过画流程图来理解递归的逻辑。
+int a[11];//用来存放n个数字的排列
+int vis[11];//下标用来表示存放的数字，数组本身内容用来判断是否被用过
+void dfs(int num, int n)//num用来表示第几位数字
 {
     int i = 0;
-    if(num == n+1)
+    if(num == n+1)//当num大于n位数的时候，递归终止，打印数组内容
     {
-        for(i = 1; i<=n-1; i++)
+        for(i = 1; i<= n; i++)
         {
             printf("%d ", a[i]);
         }
-        printf("%d", a[i]);
         printf("\n");
-        return ;
     }
-    for(i = 1; i<=n; i++)
+    else
     {
-        if(b[i])
+        for(i = 1; i<=n; i++)//这里的i用来表示存放的数字
         {
-            continue;
+            if(vis[i])//如果数字i被标记过，说明在前面已经用过，具体可通过画图理解
+            {
+                continue;
+            }
+            a[num] = i;//存放数组内容并标记i已经用过了
+            vis[i] = 1;
+            dfs(num+1, n);//继续标记下一组，像一棵树一样
+            vis[i] = 0;//回溯的时候初始化标记，用于下个并列的循环
         }
-        b[i] = 1;
-        a[num] = i;
-        dfs(num+1, n);
-        b[i] = 0;//回溯初始化
     }
-    return ;
 }
 int main()
 {
