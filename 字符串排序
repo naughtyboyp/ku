@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<string.h>
+#define N 3
+//本题属于指针的运用
+//整体思路如下
+//1.用数组存入字符串
+//2.将字符串的地址存入数组指针
+//3.运用冒泡排序 将指针数组排序
+//4.打印出数组指针内容
+void sort(char** str)//用二级指针接收数组指针，接收指针的指针叫二级指针
+{
+    int i = 0;
+    int j = 0;
+    char* temp = NULL;
+    for(i = 0; i<N-1; i++)
+    {
+        for(j = 0; j<N-1-i; j++)
+        {
+            if(strcmp(str[j],str[j+1])>0)
+            {
+                temp = str[j];//
+                str[j] = str[j+1];
+                str[j+1] = temp;
+            }
+        }
+    }
+}
+int main()
+{
+    char a[N][35] = {0};//存入字符串
+    char* s[N] = {0};//存入字符串地址
+    int i = 0;
+    for(i = 0; i<N; i++)
+    {
+        scanf("%s", &a[i]);
+        s[i] = a[i];
+    }
+    sort(s);
+    for(i = 0; i<N; i++)
+    {
+        printf("%s\n", s[i]);
+    }
+    return 0;
+}
