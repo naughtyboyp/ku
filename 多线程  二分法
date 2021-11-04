@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<math.h>
+//通过本题对二分法的理解更加深刻
+//个人理解，二分法就是假设我们已经知道答案
+//然后通过y值不断逼近修正x的值
+//本题就是 假设我们已经知道k的值
+//那么通过不断通过 当前k对应的m与想得出答案的m作比较
+//不断逼近正确答案
+//二分逼近总结   单调函数即可
+int t[100005];
+int main()
+{
+    int n = 0;
+    int m = 0;
+    scanf("%d%d", &n, &m);
+    int i = 0;
+    long long int sumt = 0;
+    for(i = 0; i<n; i++)
+    {
+        scanf("%d", &t[i]);
+        sumt+=t[i];
+    }
+    if(m<n || sumt < m)//一个线程至少需要一个时间片，n个线程至少需要n个时间片，所以当m<n时，不可能分出；同理，sumt个时间长度至少需要sumt个时间片
+    {
+        printf("%d", 0);
+        return 0;
+    }
+    int left = 0;
+    long long int right = 1e15;//k往高的地方取
+    int sum = 0;//累加每个线程的时间片，求出总时间片
+    long long int mid = 0;
+    while(left+1<right)
+    {
+        mid = (left+right)/2;
+        sum = 0;
+        for(i = 0; i<n; i++)
+        {
+            sum+=(t[i]/mid);
+            if(t[i]%mid)
+            {
+                sum++;
+            }
+        }
+        if(sum<=m)
+        {
+            right = mid;
+        }
+        else
+        {
+            left = mid;
+        }
+    }
+    printf("%lld", right);
+    return 0;
+}
