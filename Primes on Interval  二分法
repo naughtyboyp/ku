@@ -1,0 +1,130 @@
+You've decided to carry out a survey in the theory of prime numbers. Let us remind you that a prime number is a positive integer that has exactly two distinct positive integer divisors.
+
+Consider positive integers a, a + 1, ..., b (a ≤ b). You want to find the minimum integer l (1 ≤ l ≤ b - a + 1) such that for any integer x (a ≤ x ≤ b - l + 1) among l integers x, x + 1, ..., x + l - 1 there are at least k prime numbers.
+
+Find and print the required minimum l. If no value l meets the described limitations, print -1.
+
+
+
+给出整数a,b 和数值k
+
+a,b代表[a,b]区间，
+
+求出最小的长度l,使得[a,b]区间内任何一个长度为l的连续区间中素数的数量>=k.
+
+
+
+Input
+A single line contains three space-separated integers a, b, k (1 ≤ a, b, k ≤ 106; a ≤ b).
+
+Output
+In a single line print a single integer — the required minimum l. If there's no solution, print -1.
+
+SampleInput 1
+2 4 2
+SampleOutput 1
+3
+SampleInput 2
+6 13 1
+SampleOutput 2
+4
+SampleInput 3
+1 4 3
+SampleOutput 3
+-1
+
+
+
+
+
+#include<stdio.h>
+int vis[10000000];
+int prime[10000000];
+int sum[10000000];
+int a = 0;
+int b = 0;
+int p = 0;
+void EulerSieve(int m)//欧拉筛一下
+{
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    for(i = 2; i<=m; i++)
+    {
+        if(vis[i] == 0)
+        {
+            prime[k++] = i;
+        }
+        for(j = 0; j<k; j++)
+        {
+            if(i*prime[j] > m)
+            {
+                break;
+            }
+            vis[i*prime[j]] = 1;
+            if(i % prime[j] == 0)
+            {
+                break;
+            }
+        }
+    }
+}
+void s(int m)
+{
+    int i = 0;
+    int j = 0;
+    for(i = 2; i<=m; i++)
+    {
+        if(vis[i] == 0)//用前缀和，sum[i]表示从1-i之间的素数个数
+        {
+            sum[i]++;
+        }
+        sum[i]+=sum[i-1];
+    }
+}
+int judge(int mid)
+{
+    int i = 0;
+    int j = 0;
+    for(i =a; i+mid-1<=b; i++)
+    {
+        if(sum[i+mid-1] - sum[i-1] < p)//判断长度l之间的素数个数
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+int main()
+{
+    int flag = 0;
+    scanf("%d%d%d", &a, &b, &p);
+    EulerSieve(1e6+5);
+    s(1e6+5);
+    int left = 0;
+    int right = b-a+2;
+    int ans = 0;
+    while(left+1<right)
+    {
+        int mid = (left+right)/2;//mid表示探索的l的长度
+        if(judge(mid))//二分，如果是mid满足区间所有长度，ans = mid，然后继续往小的寻找
+        {
+            ans = mid;
+            right = mid;
+            flag = 1;//有一个就行
+        }
+        else
+        {
+            left = mid;
+        }
+    }
+    if(flag == 1)
+    {
+        printf("%d", ans);
+    }
+    else
+    {
+        printf("%d", -1);
+    }
+    return 0;
+}
