@@ -1,0 +1,94 @@
+约会
+TimeLimit:1000MS  MemoryLimit:128MB
+64-bit integer IO format:%lld
+Problem Description
+Hang等了一年，终于，朝气蓬勃的小学妹来了，在开学当天，就成功打入协会迎新群，在Hang的魅力（死皮赖脸）之下，有个小学妹要和他面基了，小学妹说，她就在这个学校里，让Hang过去找她
+
+假设，在二维坐标的每个点，都有一个女生，但是Hang不知道哪个是和他约会小学妹
+
+所以他在每一个位置，都会询问这个女生（因为Hang记忆力比较差，所以走过的地方可以重复走），是不是Hang认识的小学妹
+
+如果是Hang认识的小学妹，则他不会继续找下去，否则他会随机找一个方向找下去
+
+如果Hang和小学妹见面了，小学妹会问Hang他走了几步到的，如果Hang说的步数一定是假的，小学妹就和moxin大佬私奔
+
+现已知Hang的坐标（0,0），小学妹坐标（x,y），Hang回答的步数a，你能否帮小学妹判断Hang说的是否可能是真话呢？
+
+因为Hang曾经横行霸道，被人一顿暴打，所以他现在怂的只敢斜着走（↖ ↙ ↗ ↘）斜着走，如：(0,0) -> (1,1) , (1,1) ->(0,2)，（0,0）->（-1,1）
+
+Input
+多组数据，每组数据先有两个整数（x，y）(数据保证x，y都在int范围内)表示学妹的坐标，接下来再一个非负整数a（0<=a<=1015），表示Hang说他走了a步找到了小学妹
+
+Output
+如果Hang不可能找到小学妹，请输出“Not the fate”；（若Hang不可能找到小学妹，则a是无意义的）
+
+如果Hang能找到小学妹但是通过他说的步数a不能走到小学妹所在位置，请输出“You are lying”；
+如果Hang能找到小学妹并且通过他说的步数a能走到小学妹所在位置，请输出“We are together”。
+
+"能找到小学妹"指存在一个k∈N，使得Hang走k步能到达小学妹所在位置。 
+
+若Hang能找到小学妹，则对于能到达小学妹位置的所有可能步数k组成的集合（可以知道这个集合可能有无穷多个数k），只要a属于这个集合，则判断a能走到小学妹所在位置，反之a不能走到。
+
+SampleInput
+1 0 2
+2 2 1
+2 2 2
+SampleOutput
+Not the fate
+You are lying
+We are together
+
+//注意 abs函数的头文件是 stdlib.h  !!!!!!!!!!!!
+然后本题关键点就是找出规律 发现出  最短步数其实就是  x，y的绝对值的最大值  
+然后就是  判断 （a-max）%2 == 0 就行了  这个还是挺好找的
+然后就是 特判！！！！！！！！
+#include <stdio.h>
+#include <string.h>
+#include<stdlib.h>
+int main()
+{
+    int x = 0;
+    int y = 0;
+    while(~scanf("%d%d", &x, &y))
+    {
+        long long int a = 0;
+        scanf("%lld", &a);
+        if(abs(x-y)&1 )//找出规律，如果坐标相减是奇数，就不可能找到
+        {
+            printf("Not the fate\n");
+            continue;
+        }
+        if(x == 0 && y == 0)//经典特判
+        {
+            if(a != 0)
+            {
+                printf("You are lying\n");
+            }
+            else
+            {
+                printf("We are together\n");
+            }
+        }
+        else
+        {
+            int max = 0;
+            if(abs(x) > abs(y))
+            {
+                max = abs(x);
+            }
+            else
+            {
+                max = abs(y);
+            }
+            if(a >= max && (a-max)%2 == 0)
+            {
+                printf("We are together\n");
+            }
+            else
+            {
+                printf("You are lying\n");
+            }
+        }
+    }
+	return 0;
+ }
