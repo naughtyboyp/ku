@@ -1,0 +1,56 @@
+CV工程师
+TimeLimit:100MS  MemoryLimit:128MB
+64-bit integer IO format:%lld
+Problem Description
+/**
+Problem Description
+    做水题就是在浪费时间，但是一场比赛如果没有签到题的话，比赛体验就会很差。
+为了让萌新感受一血(第一个ac某一道题目)，同时为了让周赛无人爆零。
+善良的cwl决定给你们一道签到题，你只需要用正确的语言提交与下列代码等价的代码即可。
+考验手速的时候到了！！！
+
+```
+#include <stdio.h>
+
+long long ac(long long a, long long b) {
+    if(b == 0) {
+        return a;
+    }
+    return ac(a, b - 1) + ac(a, b - 1);
+}
+
+int main() {
+    long long a, b;
+    while(scanf("%lld %lld", &a, &b) != EOF) {
+        printf("%lld\n", ac(a, b));
+    }
+    return 0;
+}
+```
+
+Input
+多组输入数据，输入两个数字a, b。1 <= a <= 100, 1 <= b <= 50
+
+Output
+输出题面程序的结果
+
+SampleInput
+10 10
+SampleOutput
+10240
+
+
+//简单推出规律 就是a * 2`b
+总结  a * 2`b  相当于   a<<b
+#include <stdio.h>
+#include<math.h>
+int main()
+{
+    long long int a = 0;
+    long long int b = 0;
+    while(~scanf("%lld%lld", &a, &b))
+    {
+     
+        printf("%lld\n", a<<b);//这个意思就是a化成二进制向左移动b位，就是a * 2`b
+    }
+}
