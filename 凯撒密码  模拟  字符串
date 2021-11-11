@@ -1,0 +1,65 @@
+凯撒密码
+TimeLimit:1000MS  MemoryLimit:128MB
+64-bit integer IO format:%lld
+Problem Description
+  T`U是一个非常不喜欢冒险非常讨厌挑战的人，有一天他接到一个来自上级Home_W的任务，要求是让他把一串字符串解密，解密方法是每个位置上的字符向左位移2^(i%30)次（i表示在字符串中的下标i（i从0开始）），且A向左移是B， Z向左移是a， z向左移是A，这个字符串的解密很有意思，然而T`U嫌写代码麻烦就把问题甩给了你们，你们能很快帮他写出解密程序吗？
+
+
+
+Input
+输入多组数据 请处理到文件结束
+
+每一行输入一个加密字符串str， str的长度小于1000000， 保证没有空格等多余字符出现在字符串内。
+
+
+
+Output
+输出解密以后的字符串，每个字符串占一行
+
+
+
+SampleInput
+vc
+Zpa
+ehqlKwaGv
+SampleOutput
+we
+are
+fjutacmer
+
+//1.本题就是简单模拟
+2.就是知道 step <<= b 的意思是  step * 2`b  化成二进制 就知道了
+#include <stdio.h>
+#include <math.h>
+#include<string.h>
+char str[1000000];
+int main()
+{
+    while(~scanf("%s", str))
+    {
+        int len = strlen(str);
+        int i = 0;
+        int j = 0;
+        for(i = 0; i<len; i++)
+        {
+            int b = i%30;//你懂得
+            int step = 1;
+            step <<= b;//意思是step*2`b
+            step %= 52;//52为一次循环，所以只要0-51的数字就行了
+            for(j = 0; j<step; j++)//减少大量循环
+            {
+                str[i]++;
+                if(str[i]> 'Z' && str[i] < 'a')//看ASICC码表 a的值大于Z
+                {
+                    str[i] = 'a';
+                }
+                else if(str[i] > 'z')
+                {
+                    str[i] = 'A';
+                }
+            }
+        }
+        printf("%s\n", str);
+    }
+	return 0;
+}
