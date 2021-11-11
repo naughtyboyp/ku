@@ -1,0 +1,46 @@
+Q
+TimeLimit:1000MS  MemoryLimit:128MB
+64-bit integer IO format:%lld
+Problem Description
+QAQ发现了一个古老的传说：当在比赛的规定时间内，AC了7道题，你就会发现，别人都A了8道了。。。 _(:зゝ∠)_。
+为了验证这个古老的传说，QAQ参加了【Rating定位赛(1)】，然而，做到一半才发现，特么这场比赛只有5道题！！！
+哎，为了抚慰QAQ脆弱的心灵，我们还是出一题和7有关的水题吧：
+既然是7道题，那么这道题就是，找出n以内既是7的倍数又含有数字7的数字。
+Input
+一个数据n，n<=10000。
+
+Output
+将答案从小到大输出，每一行输出一个符合题意的答案。
+
+SampleInput
+100
+SampleOutput
+7
+70
+77
+
+
+
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    int n = 0;
+    scanf("%d", &n);
+    int i = 0;
+    for(i = 7; i<=n; i+=7)//预处理下，i肯定是7的倍数，
+    {
+        int a = i;
+        while(a)
+        {
+
+            if(a%10 == 7)//有7就行
+            {
+                printf("%d\n", i);
+                break;
+            }
+            a/=10;
+        }
+    }
+    return 0;
+}
