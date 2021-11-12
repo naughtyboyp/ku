@@ -1,0 +1,87 @@
+小黄的信件
+TimeLimit:2000MS  MemoryLimit:256MB
+64-bit integer IO format:%lld
+Problem Description
+小黄有一封尘封已久的信件，上面的内容是一个字符串。由于该信件实在是过去太久了，所以上面的有些字母已经模糊不清了，用 '#' 代替。小黄给每一个不清楚的字母都凭借记忆给出了 k 个不同的候选字母，将所有可能的字符串按字典序大小进行排序，第 x 小的字符串即为原本的字符串，聪明的你能帮助小黄复原字符串吗？
+
+关于字典序的定义，如果有不懂的同学，另外一题会有解释。
+
+Input
+第一行四个整数 N , M , K,  X （1<=N<=500000，1<=M<=N，1<=k<=26，1<=X<=10^18)
+
+第二行一个长度为 N 的字符串，仅包含小写字母和 '#' 。
+
+接下来 M 行，每行 K 个字母 ，第 i 行表示第 i 个 '#' 可以由 k 个字母中的某一个代替。
+
+保证 X 不超过能构造字符串的数量。
+
+请不要使用 gets 来读取字符串，同时如果你的代码写的很搓（常数较大）的话，也不建议使用 cin ,cout 输入输出方式。
+
+Output
+一个字符串，表示答案。
+
+SampleInput
+5 2 3 4
+c##nb
+yzd
+hws
+SampleOutput
+cyhnb
+
+//本题思路  排序字符串  用数组存放x的k进制
+//然后输出字符串就好了 本题卡了很久的BUG是因为输出字符串长度是n  我写成k了
+#include <stdio.h>
+#include <math.h>
+char a[500005];//
+char str[500005][30];
+int b[500005];////存放x-1的k进制
+void sort(char* c, int len)
+{
+    int i = 0;
+    int j = 0;
+    for(i = 0; i<len-1; i++)
+    {
+        for(j = 0; j<len-1-i; j++)
+        {
+            if(c[j] > c[j+1])
+            {
+                int temp = c[j];
+                c[j] = c[j+1];
+                c[j+1] = temp;
+            }
+        }
+    }
+}
+int main ()
+{
+	int n = 0;
+	int m = 0;
+	int k = 0;
+	unsigned long long int x = 0;
+	scanf("%d%d%d%llu", &n, &m, &k, &x);
+	int i = 0;
+	int l = m-1;
+	int p = 0;
+	scanf("%s", a);
+	for(i = 0; i<m; i++)
+    {
+        scanf("%s", str[i]);//输入可能字符串
+        sort(str[i],k);//字符串排序
+    }
+    unsigned long long int q = x-1;
+    while(q)
+    {
+        b[l--] = q%k;//存放x-1的k进制
+        q/=k;
+    }
+    for(i = 0; i<n; i++)
+    {
+        if(a[i] == '#')//覆盖
+        {
+            a[i] = str[p][b[p]];
+            p++;
+        }
+    }
+    printf("%s", a);
+	return 0;
+}
