@@ -1,0 +1,123 @@
+蝈蝈赛马
+TimeLimit:1000MS  MemoryLimit:64MB
+64-bit integer IO format:%lld
+已解决 | 点击收藏
+Problem Description
+卢宝嚣张着要和蝈蝈赛马，并且为了增加难度，卢宝在自己的每匹马上都设置了一个币值，如果卢宝这匹马赢了，那么蝈蝈就要付给卢宝相应的币，同样的，如果蝈蝈赢了卢宝这匹马，卢宝也要给蝈蝈相应的币。每匹马还有一个速度值，速度快的马会获得胜利，速度相同则平局，平局的话蝈蝈也要付给卢宝币。现在卢宝已经安排好了马的上场顺序，以及按照顺序的每匹马的币值。蝈蝈想知道，该怎么安排自己的上场顺序，才能赢得最多的钱或者怎样才能输最少的钱？（如果最后是输钱就输出负数）
+
+Input
+第一行一个t，代表t组数据（1≤t≤10）
+
+每种数据包含四行
+
+第一行为一个整数n，代表马的数量（1≤n≤1000）
+
+第二行n个数a[i]，代表卢宝各匹马的速度，并且这就是卢宝的上场顺序（1≤a[i]≤100000）
+
+第三行n个数b[i]，代表卢宝各匹马的币值，与速度值一一对应（1≤b[i]≤10000）
+
+第四行n个数c[i]，代表蝈蝈各匹马的速度（1≤c[i]≤100000）
+
+Output
+每组数据输出一行一个整数，表示蝈蝈可以赢的最多的币（输出非负数），或者输的最少的币（输出负数）
+
+SampleInput
+2
+3
+40 30 20
+1 2 3
+20 30 50
+5
+25 25 50 60 10
+10 50 5 100 30
+70 5 30 25 40
+SampleOutput
+4
+185
+
+tip：
+在第一组样例中
+第一轮中，蝈蝈用速度为20的马去对拼卢宝的速度为40的马，输掉1个币
+第二轮中，蝈蝈用速度为50的马去对拼卢宝的速度为30的马，赢得2个币
+第三轮中，蝈蝈用速度为30的马去对拼卢宝的速度为20的马，赢得3个币
+所以最后赢得4个币
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+#include<algorithm>
+struct horse
+{
+    int v;
+    int value;
+}loop[6666];
+int c[100006];
+int camp(horse x, horse y)
+{
+    return x.value > y.value;
+}
+int main()
+{
+    int t = 0;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int n = 0;
+        int i = 0;
+        scanf("%d", &n);
+        for(i = 0; i<n; i++)
+        {
+            scanf("%d", &loop[i].v);
+        }
+        for(i = 0; i<n; i++)
+        {
+            scanf("%d", &loop[i].value);
+        }
+        for(i = 0; i<n; i++)
+        {
+            scanf("%d", &c[i]);
+        }
+        std::sort(loop,loop+n,camp);
+        std::sort(c, c+n);
+        int j = 0;
+        int sum = 0;
+        for(i = 0; i<n; i++)
+        {
+            for(j = 0; j<n; j++)
+            {
+                if(loop[i].v < c[j])
+                {
+                    c[j] = -1;
+                    loop[i].v = -1;
+                    sum+=loop[i].value;
+                    break;
+                }
+            }
+        }
+        for(i = 0; i<n; i++)
+        {
+            if(loop[i].v != -1)
+            {
+                for(j = 0; j<n; j++)
+                {
+                    if(c[j] == loop[i].v)
+                    {
+                        break;
+                    }
+                    else if(c[j] < loop[i].v)
+                    {
+                        sum-=loop[i].value;
+                        break;
+                    }
+                }
+            }
+        }
+        printf("%d\n", sum);
+
+    }
+    return 0;
+}
