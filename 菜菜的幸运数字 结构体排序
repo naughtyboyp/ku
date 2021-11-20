@@ -1,0 +1,95 @@
+菜菜的幸运数字
+TimeLimit:1000MS  MemoryLimit:128MB
+64-bit integer IO format:%lld
+已解决 | 点击收藏
+Problem Description
+菜菜有一个很喜欢的数字，那个数字菜菜的幸运数字。可是有一天，菜菜一不小心把那个数字打碎了（不要问为啥数字可以摔碎，我说可以就是可以），变成了一堆无序的数字（0≤ai<10）。有仙女看到菜菜因为幸运数字碎掉很伤心，所以她就想帮一帮菜菜。但是由于仙女的魔法是有限的，所以她只能告诉菜菜第i个数字对应的是第几位，现在由你来帮菜菜还原她的幸运数字吧。
+
+Input
+多组输入
+
+先输入n（0<n <10000)，代表有n个数字
+
+接下来n个数字代表摔碎的数字ai （0≤ai< 10）
+
+接下来n个数字代表第i个数字对应的位数bi（1≤bi≤n）
+
+bi唯一不重复，因为毕竟一个位置只能有一个数
+
+Output
+输出菜菜的幸运数
+
+SampleInput
+3
+1 2 3
+3 1 2
+3 
+0 0 2
+1 2 3
+SampleOutput
+231
+2
+
+hint： 样例2是002   前导0当然得去掉
+
+//把位置location 与 数字num 连在一起   将位置排序，然后依次输出num
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+struct luckynum
+{
+    int num;
+    int lo;
+}luck[6666666];
+void sort(struct luckynum *a, int n)
+{
+    int i = 0;
+    int j = 0;
+    for(i = 0; i<n-1; i++)
+    {
+        for(j = 0; j<n-1-i; j++)
+        {
+            if(a[j].lo > a[j+1].lo)
+            {
+                struct luckynum temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp;
+            }
+        }
+    }
+}
+int main()
+{
+    int n = 0;
+    while(~scanf("%d", &n))
+    {
+        int i = 0;
+        for(i = 0; i<n; i++)
+        {
+            scanf("%d", &luck[i].num);
+        }
+        for(i = 0; i<n; i++)
+        {
+            scanf("%d", &luck[i].lo);
+        }
+        sort(luck, n);
+        int flag = 0;
+        for(i = 0; i<n; i++)
+        {
+            if(luck[i].num != 0)
+            {
+                flag = 1;
+            }
+            if(flag)
+            {
+                printf("%d", luck[i].num);
+            }
+        }
+        if(flag == 0)
+        {
+            printf("0");
+        }
+        printf("\n");
+    }
+    return 0;
+}
