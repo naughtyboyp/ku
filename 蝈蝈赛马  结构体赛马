@@ -45,6 +45,17 @@ tip：
 
 
 
+//本题学会了  sort函数与结构体排序相结合
+1.sort函数需要3个参数  还有头文件  #include<algorithm>
+（1）起始指针
+（2）结束指针
+（3）排序规则   //不写默认是从小到大
+int comp(int a, int b)
+{
+    return a > b;//从大到小排序
+}
+
+sort(s1, s2, comp);
 
 #include <stdio.h>
 #include <stdlib.h>
