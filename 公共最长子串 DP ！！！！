@@ -1,3 +1,32 @@
+蝈蝈的最长公共子串（easy）
+TimeLimit:1000MS  MemoryLimit:64MB
+64-bit integer IO format:%lld
+已解决 | 点击收藏
+Problem Description
+输入两个字符串，求两个字符串的最长公共子串的长度
+
+
+
+注：
+
+子串：字符串中任意个连续的字符组成的称为子串
+
+公共子串：两个字符串均有的共同子串
+
+Input
+输入两行两个字符串 a 和 b（1 ≤ strlen(a)，strlen(b) ≤ 1000），字符串均只包含小写字母
+
+Output
+输出一行表示两个字符串的最长公共子串的长度
+
+SampleInput
+abcdefg
+bcdabcd
+SampleOutput
+4
+
+
+
 #include<stdio.h>
 #include<string.h>
 char a[1005];
