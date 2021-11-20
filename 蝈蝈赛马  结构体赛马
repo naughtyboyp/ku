@@ -57,6 +57,31 @@ int comp(int a, int b)
 
 sort(s1, s2, comp);
 
+
+
+//情况一：数组排列
+int A[100];
+bool cmp1(int a,int b)//int为数组数据类型
+{
+    return a>b;//降序排列
+    //return a<b;//默认的升序排列
+}
+sort(A,A+100,cmp1);
+
+//情况二：结构体排序
+Student Stu[100];
+bool cmp2(Student a,Student b)
+{
+    return a.id>b.id;//按照学号降序排列
+    //return a.id<b.id;//按照学号升序排列
+}
+sort(Stu,Stu+100,cmp2);
+复制代码
+
+注：比较方法也可以放在结构体中或类中定义。
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include<string.h>
