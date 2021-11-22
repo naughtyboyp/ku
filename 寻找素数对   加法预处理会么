@@ -22,6 +22,9 @@ SampleOutput
 13 17
 17 23
 
+
+
+//既然是相加为20  那直接预处理啊！！！！
 #include<stdio.h>
 int vis[10005];
 int prime[10005];
@@ -57,16 +60,14 @@ int main()
     while(~scanf("%d", &n))
     {
         int left = n/2;
-        int right = n/2;
-        while(left, right)
+        while(left)
         {
-            if(vis[left] == 0 && vis[right] == 0)
+            if(vis[left] == 0 && vis[n-left] == 0)
             {
-                printf("%d %d\n", left, right);
+                printf("%d %d\n", left, n-left);
                 break;
             }
             left--;
-            right++;
         }
     }
     return 0;
