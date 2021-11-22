@@ -1,0 +1,73 @@
+寻找素数对
+TimeLimit:1000MS  MemoryLimit:128000MB
+64-bit integer IO format:%I64d
+已解决 | 点击收藏 | 已有3人收藏了本题
+Problem Description
+哥德巴赫猜想大家都知道一点吧.我们现在不是想证明这个结论,而是想在程序语言内部能够表示的数集中,任意取出一个偶数,来寻找两个素数,使得其和等于该偶数.
+做好了这件实事,就能说明这个猜想是成立的.
+由于可以有不同的素数对来表示同一个偶数,所以专门要求所寻找的素数对是两个值最相近的.
+
+Input
+输入中是一些偶整数M(5<M<=10000).
+
+Output
+对于每个偶数,输出两个彼此最接近的素数,其和等于该偶数.
+
+SampleInput
+20
+30
+40
+SampleOutput
+7 13
+13 17
+17 23
+
+#include<stdio.h>
+int vis[10005];
+int prime[10005];
+void Eulersieve(int n)
+{
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    for(i = 2; i<=n; i++)
+    {
+        if(vis[i] == 0)
+        {
+            prime[k++] = i;
+        }
+        for(j = 0; j<k; j++)
+        {
+            if(i * prime[j] > n)
+            {
+                break;
+            }
+            vis[i*prime[j]] = 1;
+            if(i % prime[j] == 0)
+            {
+                break;
+            }
+        }
+    }
+}
+int main()
+{
+    Eulersieve(10005);
+    int n = 0;
+    while(~scanf("%d", &n))
+    {
+        int left = n/2;
+        int right = n/2;
+        while(left, right)
+        {
+            if(vis[left] == 0 && vis[right] == 0)
+            {
+                printf("%d %d\n", left, right);
+                break;
+            }
+            left--;
+            right++;
+        }
+    }
+    return 0;
+}
