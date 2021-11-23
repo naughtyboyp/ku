@@ -63,7 +63,7 @@ int main()
         {
             if(ret % i == 0)//a*b = n*m  ,首先肯定是因子吧
             {
-                if(ret/i>=n && ret/i <=m && gcd(i,ret/i) == n)//其次锁定下定义域和 gcd就行了呀
+                if(gcd(i,ret/i) == n)//其次锁定下gcd就行了呀
                 {
                     num++;
                 }
