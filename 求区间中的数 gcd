@@ -1,0 +1,76 @@
+求区间中的数
+TimeLimit:2000MS  MemoryLimit:64MB
+64-bit integer IO format:%lld
+已解决 | 点击收藏
+Problem Description
+最近沉迷于数论，她最近在研究最小公倍数和最大公约数，她的老师Z给她留了一个作业：在[x,y]区间中，求两个整数最大公约数是x且最小公倍数是y的个数。
+
+
+
+2021.11.22 增加一个小数据
+
+Input
+第一行输入一个T(T<=300)，表示有T组数据，接下来输入两个数 x, y(1<=x<=y<=1e6)(含义如题)
+
+Output
+输出一行表示答案
+
+SampleInput
+1
+2 12
+SampleOutput
+4
+Hint
+(2,12) (4,6) (6,4) (12,2)
+
+
+
+a*b/gcd = m;
+gcd = n;
+
+a*b = n*m;
+#include <stdio.h>
+#include <stdlib.h>
+int gcd(int a, int b)
+{
+    if(a < b)
+    {
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+    while(a % b)
+    {
+        int c = a%b;
+        a = b;
+        b = c;
+    }
+    return b;
+}
+int main()
+{
+    int t = 0;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int n = 0;
+        int m = 0;
+        scanf("%d%d", &n, &m);
+        int ret = n*m;
+        int i = 0;
+        int num = 0;
+        for(i = n; i<= m; i++)
+        {
+            if(ret % i == 0)//a*b = n*m  ,首先肯定是因子吧
+            {
+                if(ret/i>=n && ret/i <=m && gcd(i,ret/i) == n)//其次锁定下定义域和 gcd就行了呀
+                {
+                    num++;
+                }
+            }
+        }
+        printf("%d\n", num);
+
+    }
+    return 0;
+}
