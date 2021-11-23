@@ -1,0 +1,67 @@
+发气球啦
+TimeLimit:1000MS  MemoryLimit:128MB
+64-bit integer IO format:%lld
+Problem Description
+QQQQQQQ准备了n种气球，每种气球有无数个，现在他有m个朋友，他给每个朋友准备了一个盒子，现在他想要把这些气球放进盒子里，送给朋友们。不过他对于送气球有一定的要求如下：
+
+1、同一种气球不能放在同一个盒子。
+
+2、盒子里可以没有气球(说明跟这人关系不咋地)，但是不能所有盒子都没有气球(意思就是所有盒子里装的气球的个数和不为0)。
+
+3、每一种气球至少要送出去一个(意思就是所有盒子里装的气球的种类和为n)
+
+现在想问有多少种装气球的方案。
+
+Input
+多组输入，每组一个n和m  1≤n、m≤109
+
+Output
+答案可能很大，请将答案取模100000007后输出。
+
+SampleInput
+1 3
+2 2
+SampleOutput
+7
+9
+
+案例一装法：
+{1}{}{}    {}{1}{}   {}{}{1}    {1}{1}{}    {}{1}{1}   {1}{}{1}     {1}{1}{1}
+
+案例二装法：
+{}{1,2}     {1,2}{}   {1}{2}    {2}{1}   {1}{1,2}  {2}{1,2}   {1,2}{1}   {1,2}{2}     {1,2}{1,2}   
+
+花括号代表盒子，数字代表气球种类
+
+
+//结论题   组合数公式  c(m,0)+c(m,1)+c(m,2)....+c(m,m)= 2^m;
+把1钟花放进m个盒子里 有  2^m-1钟情况方法
+n种花 n个事件相互独立 一种是2^m-1 n种即有 (2^m-1) ^ n 种；
+#include <stdio.h>
+#include <stdlib.h>
+#define N 100000007
+long long int fastpower(long long int base,long long int power)
+{
+    long long int ans = 1;
+    while(power)
+    {
+        if(power & 1)
+        {
+            ans = ans*base%N;
+        }
+        power>>=1;
+        base = base*base%N;
+    }
+    return ans;
+}
+int main()
+{
+    long long int n = 0;
+    long long int m = 0;
+    while(~scanf("%lld%lld", &n, &m))
+    {
+
+        printf("%lld\n", fastpower(fastpower(2,m)-1, n));
+    }
+    return 0;
+}
