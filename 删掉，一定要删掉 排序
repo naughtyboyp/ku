@@ -1,0 +1,57 @@
+删掉，一定要删掉
+TimeLimit:1000MS  MemoryLimit:128MB
+64-bit integer IO format:%lld
+已解决 | 点击收藏
+Problem Description
+diwa讨厌一个数组里有相邻或者重复的数字，上帝芃芃便赐予了diwa一种能力，每次使用这种能力，diwa都能从数组中任意选出两个不相等的下标i和j，如果x[i]和x[j]的差的绝对值不超过1，diwa便能删除两个数中较大的一个数，相同则可以删除任意一个数。在允许无限次使用能力的前提下，diwa想知道能不能让数组最后只剩一个元素。
+
+Input
+第一行输入一个n，表示数组的元素数量。（1≤n≤1000）
+
+第二行输入n个整数，表示数组元素。（0≤ai≤100000）
+
+Output
+如果最后能只剩一个元素，则输出"Yes"；否则，输出"No"。
+
+SampleInput
+5
+1 2 3 3 4
+SampleOutput
+Yes
+
+#include <stdio.h>
+#include <stdlib.h>
+#include<algorithm>
+int comp(int x, int y)
+{
+    return x > y;
+}
+int main()
+{
+    int n = 0;
+    scanf("%d", &n);
+    int i = 0;
+    int a[1005] = {0};
+    for(i = 0; i<n; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+    std::sort(a, a+n);
+    int num = 0;
+    for(i = 1; i<n; i++)
+    {
+        if(a[i] - a[i-1] >1)//只删除较大数，所以，出现这种情况  a[i]就不可能被删去了  
+        {
+            num++;
+        }
+    }
+    if(num)
+    {
+        printf("No");
+    }
+    else
+    {
+        printf("Yes");
+    }
+    return 0;
+}
