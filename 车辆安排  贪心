@@ -1,0 +1,77 @@
+车辆安排
+TimeLimit:1000MS  MemoryLimit:128MB
+64-bit integer IO format:%lld
+已解决 | 点击收藏
+Problem Description
+有n个队伍，每个队伍的人数小于等于5，每辆车最多坐5个人，要求一个队伍的人都在一辆车上，求最少的车数
+
+Input
+单组数据
+
+第一行n
+第二行n个数，表示每个队伍的人数
+
+n<=105
+
+每个队伍的人数<=5
+
+
+
+Output
+输出最少车数
+
+SampleInput
+3
+3 4 5
+SampleOutput
+3
+
+
+
+从大到小排序 
+然后最大的最小的不断上车 
+#include <iostream>
+#include<algorithm>
+#include<stdio.h>
+using namespace std;
+int a[100005];
+
+int comp(int x, int y)
+{
+    return x > y;
+}
+int main()
+{
+    int n = 0;
+    scanf("%d", &n);
+    int sum = n;//代表队伍数量
+    int ans = 0;
+    int i = 0;
+    for(i = 1; i<=n; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+    sort(a+1,a+n+1,comp);//大到小排序
+    int left = 1;//从左边开始
+    int right = n;//从右边开始
+    while(sum)//当队伍数量不是0的时候就继续
+    {
+        int temp = a[left];//temp用来计算人数
+        sum--;//a[left]这个队伍肯定要上车，减掉一个队
+        while(temp < 5 && left <right)//大于等于5的直接来辆车
+        {
+            temp+=a[right];//加人
+            if(temp > 5)//如果大于5人的话，right是不能 -- 的 但如果是5人的话right是要--的
+            {
+                break;
+            }
+            sum--;//说明此时车里的人数<=5 那a[right]这个队就上车了
+            right--;//继续往里
+        }
+        ans++;//车人够了  来一辆法拉利！！！！
+        left++;//a[left] 必上车
+    }
+    printf("%d", ans);
+
+    return 0;
+}
