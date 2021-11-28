@@ -1,0 +1,73 @@
+seventh的日历
+TimeLimit:1000MS  MemoryLimit:128MB
+64-bit integer IO format:%lld
+已解决 | 点击收藏
+Problem Description
+seventh有一个奇怪的日历，这个日历日期都是由星期构成的（星期一、星期二、星期三、星期四、星期五、星期六、星期天）。
+
+告诉你今年是第y年，问今年之后最早的哪一年的日历和今年的日历相同。
+
+闰年的定义:闰年有366天，如果年份能被400整除，或者年份能被4整除但不能被100整除，那么今年就是闰年。
+
+Input
+多组数据，每组输入一个数字y(1<=y<=10000)
+
+Output
+每组数据输出一个数字表示答案
+
+SampleInput
+2018
+SampleOutput
+2029
+
+
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+# define N 1000000007
+int isleap(int y )
+{
+    if((y %4 == 0 && y % 100 != 0) || (y %400 == 0))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int main()
+{
+    int y = 0;
+    while(~scanf("%d", &y))
+    {
+        int ans = y;
+        int d = 1;//假设每年一月一号都是星期一
+        while(1)
+        {
+            ans++;//2019
+            if(isleap(ans-1))//366%7 = 2 加2
+            {
+                d+=2;
+            }
+            else
+            {
+                d++;//365%7 = 1 说明下一年的一月一号 是星期二 要加1
+            }
+            if(d > 7)
+            {
+                d-=7;
+            }
+            if(d == 1 && isleap(ans) == isleap(y))//当一月一号都是星期一且年份都相同的  就说明完全一样
+            {
+                break;
+            }
+        }
+        printf("%d\n", ans);
+    }
+    return 0;
+}
